@@ -1,3 +1,26 @@
 [mcp_servers.nx-mcp]
 command = "npx"
-args = [ "nx-mcp@latest", "--minimal" ]
+args = [ "nx", "mcp", "--minimal" ]
+
+[mcp_servers.spring-docs]
+command = "npx"
+args = [ "-y", "@enokdev/springdocs-mcp" ]
+
+[mcp_servers.Context7]
+command = "npx"
+args = [ "-y", ""@upstash/context7-mcp@latest" ]
+
+[mcp_servers.sequential-thinking]
+command = "npx"
+args = [ "-y", "@modelcontextprotocol/server-sequential-thinking" ]
+
+[mcp_servers.chrome-devtools]
+command = "npx"
+args = [ "-y", "chrome-devtools-mcp@latest" ]
+
+[features]
+multi_agent = true
+
+[agents.ci-monitor-subagent]
+description = "CI helper for /monitor-ci. Fetches CI status, retrieves fix details, or updates self-healing fixes. Executes one MCP tool call and returns the result."
+config_file = "agents/ci-monitor-subagent.toml"

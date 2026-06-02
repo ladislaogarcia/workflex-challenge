@@ -1,0 +1,49 @@
+{
+  "mcpServers": {
+     "nx-mcp": {
+      "command": "npx.cmd",
+      "args": [
+        "-y",
+        "nx",
+        "mcp"
+      ]
+    },
+    "spring-docs": {
+      "command": "npx.cmd",
+      "args": [
+        "-y",
+        "@enokdev/springdocs-mcp"
+      ]
+    },
+    "Context7": {
+      "command": "npx.cmd",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ]
+    },
+    "sequential-thinking": {
+      "command": "npx.cmd",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "postgres": {
+      "command": "npx.cmd",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://postgres:postgres_password@localhost:5432/postgres"
+      ]
+    },
+    "chrome-devtools": {
+      "command": "npx.cmd",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ],
+      "type": "stdio"
+    }
+  }
+}

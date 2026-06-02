@@ -1,0 +1,29 @@
+<h1>Workations</h1>
+<table class="workflex-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Employee</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Working Days</th>
+            <th>Risk</th>
+        </tr>
+    </thead>
+    <tbody>
+  @for (workation of workations$ | async; track workation.workationId) {
+    <tr>
+      <td>{{ workation.workationId }}</td>
+      <td>{{ workation.employee }}</td>
+      <td>{{ workation.origin }}</td>
+      <td>{{ workation.destination }}</td>
+      <td>{{ workation.start }}</td>
+      <td>{{ workation.end }}</td>
+      <td>{{ workation.workingDays }}</td>
+      <td>{{ workation.risk }}</td>
+    </tr>
+  }
+</tbody>
+</table>

@@ -1,107 +1,75 @@
-# New Nx Repository
+# WorkFlex Coding Challenge - Full Stack
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+This project is a full-stack application developed as part of a 2.5-hour coding challenge. it consists of a Spring Boot API and an Angular web application managed within an Nx monorepo.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+## Project Overview
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
-## Finish your Nx platform setup
+The application manages "Workations" (work + vacation), allowing users to view a list of workation records. The data is persisted in a local SQLite database and pre-populated from a CSV file during the initial startup.
 
-🚀 [Finish setting up your workspace](https://cloud.nx.app/connect/KQe1x8dk26) to get faster builds with remote caching, distributed task execution, and self-healing CI. [Learn more about Nx Cloud](https://nx.dev/ci/intro/why-nx-cloud).
+## Technology Stack
 
-## Generate a library
+- **Backend:** Spring Boot 3.x, Java 17, Spring Data JPA, Hibernate, SQLite, Maven.
+- **Frontend:** Angular, Nx Workspace, TypeScript, Tailwind CSS (optional).
+- **Tooling:** Nx for monorepo management.
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+## Prerequisites
+
+- **Java 17** or higher.
+- **Node.js** (v18+) and **npm**.
+- **Maven** (optional, wrapper included).
+
+## Getting Started
+
+### 1. Install Dependencies
+
+From the root of the workspace, run:
+
+```bash
+npm install
 ```
 
-## Run tasks
+### 2. Run the Backend API
 
-To build the library use:
+The API runs on `http://localhost:8000`.
 
-```sh
-npx nx build pkg1
+```bash
+npx nx serve api
 ```
 
-To run any task with Nx use:
+The database will be created automatically (`apps/api/database.db`) and populated with data from `apps/api/src/main/resources/csv/workations.csv`.
 
-```sh
-npx nx <target> <project-name>
+### 3. Run the Web Application
+
+The frontend runs on `http://localhost:4200`.
+
+```bash
+npx nx serve web
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## API Documentation
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Once the API is running, you can access the Swagger UI for interactive documentation:
+- [http://localhost:8000/swagger-ui.html](http://localhost:8000/swagger-ui.html)
 
-## Versioning and releasing
+### Endpoints
+- `GET /workflex/workation`: Retrieve the list of all workations.
 
-To version and release the library use
+## Implementation Notes
 
+- **Database:** Uses SQLite for zero-configuration local setup. The path is set to `database.db` in the project root for portability.
+- **CORS:** Enabled on the API to allow the Angular development server to fetch data.
+- **ID Strategy:** The `Workation` entity uses `String` as the ID type to match the provided CSV identifiers (e.g., "w1", "w2").
+- **Standalone Components:** The Angular application uses standalone components for modern best practices.
+
+## Running Tests
+
+### API Tests
+```bash
+npx nx test api
 ```
-npx nx release
+Includes unit tests for the service layer and integration tests for the controller using MockMvc.
+
+### Web Tests
+```bash
+npx nx test web
 ```
-
-Pass `--dry-run` to see what would happen without actually releasing the library.
-
-[Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Keep TypeScript project references up to date
-
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
-```
-
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
-
-```sh
-npx nx sync:check
-```
-
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
-
-## Nx Cloud
-
-Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Set up CI (non-Github Actions CI)
-
-**Note:** This is only required if your CI provider is not GitHub Actions.
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
